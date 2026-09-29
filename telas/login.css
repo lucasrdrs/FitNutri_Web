@@ -1,0 +1,87 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../imagens/login-academia.jpeg);
+    background-size: cover;
+    height: 100vh;
+    color: white;
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card{
+    width: 300px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 22px;
+    box-shadow: 0px 20px 60px rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+}
+
+h2{
+    text-align: center;
+    margin-bottom:  20px;
+}
+
+.input-box{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    border-radius: 6px;
+    margin: 20px;
+}
+
+.icon{
+    margin-right: 10px;
+}
+
+.input-box input{
+    background: rgba(255, 255, 255, 1);
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 14px;
+}
+
+.input-box input::placeholder{
+    color: white;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+.link{
+    color: #f5f5f5;
+    text-decoration: none;
+    margin: 14px;
+}
+
+.link-p{
+    text-align: center;
+}
+
+.btn{
+    width: 100%;
+    padding: 10px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
