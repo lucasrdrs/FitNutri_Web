@@ -126,3 +126,10 @@ h2{
     margin-top: 10px;
 }
 
+.login-message {
+    min-height: 18px;
+    margin: 0 20px 10px;
+    color: #a32626;
+    font-size: 13px;
+}
+
