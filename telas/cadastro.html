@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta | FitNutri</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./cadastro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script src="./cadastro.js" defer></script>
+</head>
+<body>
+    <main class="container">
+        <section class="login-card" aria-labelledby="registerTitle">
+            <h2 id="registerTitle">Criar conta</h2>
+            <p class="register-description">Comece sua jornada com a FitNutri.</p>
+
+            <form id="registerForm">
+                <div class="input-box">
+                    <span class="icon" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                    <input
+                        type="text"
+                        id="registerUserName"
+                        name="userName"
+                        placeholder="Nome de usuário"
+                        autocomplete="username"
+                        minlength="3"
+                        maxlength="50"
+                        required>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon" aria-hidden="true"><i class="fa-solid fa-envelope"></i></span>
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        name="email"
+                        placeholder="E-mail"
+                        autocomplete="email"
+                        maxlength="256"
+                        required>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
+                    <input
+                        type="tel"
+                        id="registerPhoneNumber"
+                        name="phoneNumber"
+                        placeholder="Telefone (opcional)"
+                        autocomplete="tel">
+                </div>
+
+                <div class="input-box">
+                    <span class="icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        name="password"
+                        placeholder="Senha"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required>
+                </div>
+                <p class="password-note">Use pelo menos 8 caracteres, com maiúscula, minúscula, número e símbolo.</p>
+
+                <div class="input-box">
+                    <span class="icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirme sua senha"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required>
+                </div>
+
+                <p id="registerMessage" class="login-message" role="alert" aria-live="polite"></p>
+
+                <button type="submit" class="btn">Criar conta</button>
+
+                <p class="link-p">
+                    <a href="./login.html" class="link" target="_blank" rel="noopener">Já tem uma conta? Entrar</a>
+                </p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

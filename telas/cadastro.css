@@ -1,0 +1,27 @@
+.register-description {
+    margin: -8px 0 8px;
+    color: #53645a;
+    font-size: 14px;
+    text-align: center;
+}
+
+.field-note,
+.password-note {
+    margin: -12px 20px 14px;
+    color: #53645a;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+#registerMessage.success {
+    color: #103B2B;
+}
+
+#registerMessage.error {
+    color: #a32626;
+}
+
+#registerForm .btn:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
