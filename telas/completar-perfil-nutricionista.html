@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de nutricionista | FitNutri</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./onboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script src="./comum.js" defer></script>
+    <script src="./completar-perfil-nutricionista.js" defer></script>
+</head>
+<body>
+    <a class="pular-link" href="#conteudo">Ir para o conteúdo</a>
+
+    <div class="divisao">
+        <div class="divisao__lateral">
+            <a class="marca" href="./apresentacao.html" target="_blank" rel="noopener">
+                <svg class="marca__icone" viewBox="0 0 56 64" aria-hidden="true">
+                    <path d="M27.8 42.5C15.8 37 10.2 25.7 14.1 12.1c9 5.1 15.4 14.1 14.3 27.6" />
+                    <path d="M28.8 41.2c1.2-14 9.4-24.2 21-28.1.6 12.4-5.7 24.1-20.8 28.8" />
+                    <path d="M28.3 39.6v16.1" />
+                    <path d="M13.5 55.7c8.7-3.5 21.2-3.5 29.6 0" />
+                </svg>
+                <span class="marca__nome">FitNutri</span>
+                <span class="sr-only">(abre em nova aba)</span>
+            </a>
+            <p class="divisao__frase">Mostre sua formação para quem procura orientação de verdade.</p>
+        </div>
+
+        <main class="divisao__painel" id="conteudo">
+            <div class="painel__miolo">
+                <p class="passo">
+                    <span class="progresso" aria-hidden="true"><span></span><span class="ativo"></span></span>
+                    Etapa 2 de 2
+                </p>
+
+                <h1>Perfil de nutricionista</h1>
+                <p class="painel__intro">Conte quem você é e como atende. Usamos o número do CRN para verificar seu registro.</p>
+
+                <div class="aviso aviso--pendente" role="note">
+                    <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+                    <p>
+                        <strong>Seu perfil passa por verificação.</strong>
+                        Depois do envio, ele fica como
+                        <span class="selo selo--pendente">Pendente de verificação</span>
+                        até conferirmos seu CRN. Nesse período, ele não aparece para os usuários.
+                    </p>
+                </div>
+
+                <form id="formPerfilNutricionista" novalidate>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="nome">Nome completo</label>
+                        <div class="input-box">
+                            <span class="icone" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                            <input type="text" id="nome" name="nome" autocomplete="name" maxlength="100" required
+                                data-validar data-regra="nomeCompleto" data-erro="erro-nome" aria-describedby="erro-nome"
+                                data-msg-obrigatorio="Informe seu nome completo.">
+                        </div>
+                        <p class="campo__erro" id="erro-nome"></p>
+                    </div>
+
+                    <fieldset class="campo" aria-describedby="dica-crn erro-crn">
+                        <legend class="campo__rotulo">Registro no CRN</legend>
+                        <div class="linha-2">
+                            <div>
+                                <label class="campo__subrotulo" for="crnRegiao">Regional</label>
+                                <div class="input-box">
+                                    <select id="crnRegiao" name="crnRegiao" required
+                                        data-validar data-erro="erro-crn"
+                                        data-msg-obrigatorio="Escolha a regional do seu CRN.">
+                                        <option value="" disabled selected>CRN-</option>
+                                        <option value="1">CRN-1</option>
+                                        <option value="2">CRN-2</option>
+                                        <option value="3">CRN-3</option>
+                                        <option value="4">CRN-4</option>
+                                        <option value="5">CRN-5</option>
+                                        <option value="6">CRN-6</option>
+                                        <option value="7">CRN-7</option>
+                                        <option value="8">CRN-8</option>
+                                        <option value="9">CRN-9</option>
+                                        <option value="10">CRN-10</option>
+                                    </select>
+                                    <span class="seta" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="campo__subrotulo" for="crnNumero">Número do registro</label>
+                                <div class="input-box">
+                                    <span class="icone" aria-hidden="true"><i class="fa-solid fa-id-card"></i></span>
+                                    <input type="text" id="crnNumero" name="crnNumero" inputmode="numeric" autocomplete="off"
+                                        maxlength="7" pattern="\d{3,7}" required
+                                        data-validar data-erro="erro-crn"
+                                        data-msg-obrigatorio="Informe o número do seu CRN."
+                                        data-msg-invalido="Use só números, de 3 a 7 dígitos.">
+                                </div>
+                            </div>
+                        </div>
+                        <p class="campo__dica" id="dica-crn">Exemplo: CRN-1 12345. Use o número que aparece na sua carteira profissional.</p>
+                        <p class="campo__erro" id="erro-crn"></p>
+                    </fieldset>
+
+                    <div class="campo">
+                        <label class="campo__rotulo" for="especialidade">Especialidade</label>
+                        <div class="input-box">
+                            <span class="icone" aria-hidden="true"><i class="fa-solid fa-stethoscope"></i></span>
+                            <select id="especialidade" name="especialidade" required
+                                data-validar data-erro="erro-especialidade" aria-describedby="erro-especialidade"
+                                data-msg-obrigatorio="Escolha sua especialidade.">
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="Nutrição esportiva">Nutrição esportiva</option>
+                                <option value="Emagrecimento e controle de peso">Emagrecimento e controle de peso</option>
+                                <option value="Nutrição clínica">Nutrição clínica</option>
+                                <option value="Nutrição funcional">Nutrição funcional</option>
+                                <option value="Saúde da mulher e materno-infantil">Saúde da mulher e materno-infantil</option>
+                                <option value="Alimentação vegetariana e vegana">Alimentação vegetariana e vegana</option>
+                                <option value="Outra">Outra</option>
+                            </select>
+                            <span class="seta" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <p class="campo__erro" id="erro-especialidade"></p>
+                    </div>
+
+                    <div class="campo" id="blocoOutraEspecialidade" hidden>
+                        <label class="campo__rotulo" for="especialidadeOutra">Qual é a sua especialidade?</label>
+                        <div class="input-box">
+                            <span class="icone" aria-hidden="true"><i class="fa-solid fa-pen"></i></span>
+                            <input type="text" id="especialidadeOutra" name="especialidadeOutra" maxlength="80" autocomplete="off" required
+                                data-validar data-erro="erro-outra" aria-describedby="erro-outra"
+                                data-msg-obrigatorio="Informe sua especialidade.">
+                        </div>
+                        <p class="campo__erro" id="erro-outra"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__rotulo" for="apresentacao">Apresentação</label>
+                        <div class="input-box input-box--area">
+                            <span class="icone" aria-hidden="true"><i class="fa-solid fa-align-left"></i></span>
+                            <textarea id="apresentacao" name="apresentacao" rows="6" minlength="40" maxlength="600" required
+                                data-validar data-erro="erro-apresentacao" aria-describedby="dica-apresentacao erro-apresentacao"
+                                data-msg-obrigatorio="Escreva uma breve apresentação."
+                                data-msg-invalido="Escreva pelo menos 40 caracteres."></textarea>
+                        </div>
+                        <p class="campo__dica" id="dica-apresentacao">Conte sua formação, quem você atende e como trabalha. Esse texto aparece no seu perfil.</p>
+                        <p class="campo__dica" id="contador"></p>
+                        <p class="campo__erro" id="erro-apresentacao"></p>
+                    </div>
+
+                    <div class="campo">
+                        <div class="opcoes opcoes--unica">
+                            <label class="opcao">
+                                <input type="checkbox" name="confirmacao" value="sim" required
+                                    data-validar data-erro="erro-confirmacao" aria-describedby="erro-confirmacao"
+                                    data-msg-obrigatorio="Confirme as informações para enviar o perfil.">
+                                <span>Declaro que as informações são verdadeiras e autorizo a FitNutri a conferir meu registro no CRN.</span>
+                            </label>
+                        </div>
+                        <p class="campo__erro" id="erro-confirmacao"></p>
+                    </div>
+
+                    <p id="mensagem" class="mensagem" role="status"></p>
+
+                    <button type="submit" class="btn btn--bloco">Enviar perfil para verificação</button>
+
+                    <p class="painel__voltar">
+                        <a href="./onboarding.html" target="_blank" rel="noopener">Escolher outro tipo de perfil<span class="sr-only"> (abre em nova aba)</span></a>
+                    </p>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início do nutricionista | FitNutri</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./painel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script src="./comum.js" defer></script>
+    <script src="./inicio-nutricionista.js" defer></script>
+</head>
+<body class="interno">
+    <a class="pular-link" href="#conteudo">Ir para o conteúdo</a>
+
+    <header class="topo">
+        <div class="topo__miolo">
+            <a class="marca" href="./apresentacao.html" target="_blank" rel="noopener">
+                <svg class="marca__icone" viewBox="0 0 56 64" aria-hidden="true">
+                    <path d="M27.8 42.5C15.8 37 10.2 25.7 14.1 12.1c9 5.1 15.4 14.1 14.3 27.6" />
+                    <path d="M28.8 41.2c1.2-14 9.4-24.2 21-28.1.6 12.4-5.7 24.1-20.8 28.8" />
+                    <path d="M28.3 39.6v16.1" />
+                    <path d="M13.5 55.7c8.7-3.5 21.2-3.5 29.6 0" />
+                </svg>
+                <span class="marca__nome">FitNutri</span>
+                <span class="sr-only">(abre em nova aba)</span>
+            </a>
+
+            <nav aria-label="Navegação principal">
+                <span aria-current="page">Início</span>
+                <a href="./meu-perfil.html" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i> Meu perfil<span class="sr-only"> (abre em nova aba)</span>
+                </a>
+                <a href="./login.html" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Sair<span class="sr-only"> (abre em nova aba)</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pagina" id="conteudo">
+        <section id="conteudoPerfil" aria-labelledby="titulo-pagina" hidden>
+            <div class="pagina__cabeca">
+                <h1 id="titulo-pagina">Olá, <span id="primeiroNome"></span></h1>
+                <p class="pagina__sub">Acompanhe a verificação do seu registro e veja como seu perfil aparece.</p>
+            </div>
+
+            <div class="grade">
+                <section id="cartaoStatus" class="cartao cartao--largo" aria-labelledby="titulo-status">
+                    <div class="status__topo">
+                        <h2 id="titulo-status">Verificação do registro</h2>
+                        <span id="seloStatus"></span>
+                    </div>
+
+                    <p class="status__texto">
+                        <strong id="statusTitulo"></strong>
+                        <span id="statusDetalhe"></span>
+                    </p>
+
+                    <ol class="etapas" id="listaEtapas" aria-label="Etapas da verificação"></ol>
+                </section>
+
+                <section class="cartao" aria-labelledby="titulo-resumo">
+                    <h2 id="titulo-resumo">Seu perfil profissional</h2>
+
+                    <dl class="dados">
+                        <div>
+                            <dt>Registro profissional</dt>
+                            <dd id="dCrn"></dd>
+                        </div>
+                        <div>
+                            <dt>Especialidade</dt>
+                            <dd id="dEspecialidade"></dd>
+                        </div>
+                        <div>
+                            <dt>Apresentação</dt>
+                            <dd id="dApresentacao" class="dados__texto"></dd>
+                        </div>
+                    </dl>
+
+                    <a class="btn btn--secundario" href="./meu-perfil.html" target="_blank" rel="noopener">
+                        Ver e editar perfil<span class="sr-only"> (abre em nova aba)</span>
+                    </a>
+                </section>
+
+                <section class="cartao" aria-labelledby="titulo-recursos">
+                    <h2 id="titulo-recursos">Seu espaço de atendimento</h2>
+
+                    <ul class="lista-embreve">
+                        <li>
+                            <span class="lista-embreve__icone" aria-hidden="true"><i class="fa-solid fa-users"></i></span>
+                            <div>
+                                <strong>Pacientes</strong>
+                                <span class="detalhe">Acompanhe quem você atende.</span>
+                                <span class="etiqueta" data-etiqueta></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="lista-embreve__icone" aria-hidden="true"><i class="fa-solid fa-clipboard-list"></i></span>
+                            <div>
+                                <strong>Dietas</strong>
+                                <span class="detalhe">Monte e ajuste planos alimentares.</span>
+                                <span class="etiqueta" data-etiqueta></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="lista-embreve__icone" aria-hidden="true"><i class="fa-solid fa-comments"></i></span>
+                            <div>
+                                <strong>Conversas</strong>
+                                <span class="detalhe">Responda seus pacientes pelo chat.</span>
+                                <span class="etiqueta" data-etiqueta></span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+
+        <section id="estadoVazio" class="cartao" aria-labelledby="titulo-vazio" hidden>
+            <h1 id="titulo-vazio">Você ainda não completou seu perfil</h1>
+            <p>Escolha o tipo de perfil e preencha seus dados para ver sua página inicial.</p>
+            <a class="btn" href="./onboarding.html" target="_blank" rel="noopener">
+                Completar perfil<span class="sr-only"> (abre em nova aba)</span>
+            </a>
+        </section>
+
+        <section id="estadoOutroTipo" class="cartao" aria-labelledby="titulo-outro" hidden>
+            <h1 id="titulo-outro">Este perfil é de usuário</h1>
+            <p>Esta página é para nutricionistas. Sua página inicial é a de usuário.</p>
+            <a class="btn" href="./inicio-usuario.html" target="_blank" rel="noopener">
+                Abrir página de usuário<span class="sr-only"> (abre em nova aba)</span>
+            </a>
+        </section>
+    </main>
+</body>
+</html>

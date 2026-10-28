@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete seu perfil | FitNutri</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./onboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script src="./comum.js" defer></script>
+    <script src="./completar-perfil-usuario.js" defer></script>
+</head>
+<body>
+    <a class="pular-link" href="#conteudo">Ir para o conteúdo</a>
+
+    <div class="divisao">
+        <div class="divisao__lateral">
+            <a class="marca" href="./apresentacao.html" target="_blank" rel="noopener">
+                <svg class="marca__icone" viewBox="0 0 56 64" aria-hidden="true">
+                    <path d="M27.8 42.5C15.8 37 10.2 25.7 14.1 12.1c9 5.1 15.4 14.1 14.3 27.6" />
+                    <path d="M28.8 41.2c1.2-14 9.4-24.2 21-28.1.6 12.4-5.7 24.1-20.8 28.8" />
+                    <path d="M28.3 39.6v16.1" />
+                    <path d="M13.5 55.7c8.7-3.5 21.2-3.5 29.6 0" />
+                </svg>
+                <span class="marca__nome">FitNutri</span>
+                <span class="sr-only">(abre em nova aba)</span>
+            </a>
+            <p class="divisao__frase">Quanto melhor conhecemos sua rotina, mais útil fica a orientação.</p>
+        </div>
+
+        <main class="divisao__painel" id="conteudo">
+            <div class="painel__miolo">
+                <p class="passo">
+                    <span class="progresso" aria-hidden="true"><span></span><span class="ativo"></span></span>
+                    Etapa 2 de 2
+                </p>
+
+                <h1>Complete seu perfil</h1>
+                <p class="painel__intro">Essas informações ajudam o nutricionista a orientar você. Preencha só o que se sentir à vontade para compartilhar.</p>
+
+                <form id="formPerfilUsuario" novalidate>
+                    <div class="campo">
+                        <label class="campo__rotulo" for="nome">Nome completo</label>
+                        <div class="input-box">
+                            <span class="icone" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                            <input type="text" id="nome" name="nome" autocomplete="name" maxlength="100" required
+                                data-validar data-regra="nomeCompleto" data-erro="erro-nome" aria-describedby="erro-nome"
+                                data-msg-obrigatorio="Informe seu nome completo.">
+                        </div>
+                        <p class="campo__erro" id="erro-nome"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__rotulo" for="nascimento">Data de nascimento</label>
+                        <div class="input-box">
+                            <span class="icone" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span>
+                            <input type="date" id="nascimento" name="nascimento" autocomplete="bday" required
+                                data-validar data-regra="dataNascimento" data-erro="erro-nascimento" aria-describedby="erro-nascimento"
+                                data-msg-obrigatorio="Informe sua data de nascimento.">
+                        </div>
+                        <p class="campo__erro" id="erro-nascimento"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label class="campo__rotulo" for="objetivo">Objetivo principal</label>
+                        <div class="input-box">
+                            <span class="icone" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>
+                            <select id="objetivo" name="objetivo" required
+                                data-validar data-erro="erro-objetivo" aria-describedby="erro-objetivo"
+                                data-msg-obrigatorio="Escolha seu objetivo principal.">
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="Ganhar massa muscular">Ganhar massa muscular</option>
+                                <option value="Emagrecer">Emagrecer</option>
+                                <option value="Melhorar o desempenho nos treinos">Melhorar o desempenho nos treinos</option>
+                                <option value="Manter a saúde e o bem-estar">Manter a saúde e o bem-estar</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                            <span class="seta" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <p class="campo__erro" id="erro-objetivo"></p>
+                    </div>
+
+                    <fieldset class="campo" aria-describedby="erro-rotina">
+                        <legend class="campo__rotulo">Rotina de treino</legend>
+                        <div class="opcoes">
+                            <label class="opcao">
+                                <input type="radio" name="rotina" value="Ainda não treino" required data-validar data-erro="erro-rotina" data-msg-obrigatorio="Escolha uma opção de rotina.">
+                                <span>Ainda não treino</span>
+                            </label>
+                            <label class="opcao">
+                                <input type="radio" name="rotina" value="1 a 2 vezes por semana" required data-validar data-erro="erro-rotina" data-msg-obrigatorio="Escolha uma opção de rotina.">
+                                <span>1 a 2 vezes por semana</span>
+                            </label>
+                            <label class="opcao">
+                                <input type="radio" name="rotina" value="3 a 4 vezes por semana" required data-validar data-erro="erro-rotina" data-msg-obrigatorio="Escolha uma opção de rotina.">
+                                <span>3 a 4 vezes por semana</span>
+                            </label>
+                            <label class="opcao">
+                                <input type="radio" name="rotina" value="5 vezes ou mais por semana" required data-validar data-erro="erro-rotina" data-msg-obrigatorio="Escolha uma opção de rotina.">
+                                <span>5 vezes ou mais por semana</span>
+                            </label>
+                        </div>
+                        <p class="campo__erro" id="erro-rotina"></p>
+                    </fieldset>
+
+                    <fieldset class="campo">
+                        <legend class="campo__rotulo">Restrições alimentares (opcional)</legend>
+                        <div class="opcoes">
+                            <label class="opcao">
+                                <input type="checkbox" name="restricoes" value="Intolerância à lactose">
+                                <span>Intolerância à lactose</span>
+                            </label>
+                            <label class="opcao">
+                                <input type="checkbox" name="restricoes" value="Sem glúten">
+                                <span>Sem glúten</span>
+                            </label>
+                            <label class="opcao">
+                                <input type="checkbox" name="restricoes" value="Vegetariano">
+                                <span>Vegetariano</span>
+                            </label>
+                            <label class="opcao">
+                                <input type="checkbox" name="restricoes" value="Vegano">
+                                <span>Vegano</span>
+                            </label>
+                            <label class="opcao">
+                                <input type="checkbox" name="restricoes" value="Alergia a oleaginosas">
+                                <span>Alergia a oleaginosas</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <div class="campo">
+                        <label class="campo__rotulo" for="outrasRestricoes">Outras restrições ou alergias (opcional)</label>
+                        <div class="input-box">
+                            <span class="icone" aria-hidden="true"><i class="fa-solid fa-pen"></i></span>
+                            <input type="text" id="outrasRestricoes" name="outrasRestricoes" maxlength="150" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <p id="mensagem" class="mensagem" role="status"></p>
+
+                    <button type="submit" class="btn btn--bloco">Salvar perfil</button>
+
+                    <p class="painel__voltar">
+                        <a href="./onboarding.html" target="_blank" rel="noopener">Escolher outro tipo de perfil<span class="sr-only"> (abre em nova aba)</span></a>
+                    </p>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

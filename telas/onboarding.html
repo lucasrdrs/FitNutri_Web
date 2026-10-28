@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu perfil | FitNutri</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./onboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script src="./comum.js" defer></script>
+    <script src="./onboarding.js" defer></script>
+</head>
+<body>
+    <a class="pular-link" href="#conteudo">Ir para o conteúdo</a>
+
+    <div class="divisao">
+        <div class="divisao__lateral">
+            <a class="marca" href="./apresentacao.html" target="_blank" rel="noopener">
+                <svg class="marca__icone" viewBox="0 0 56 64" aria-hidden="true">
+                    <path d="M27.8 42.5C15.8 37 10.2 25.7 14.1 12.1c9 5.1 15.4 14.1 14.3 27.6" />
+                    <path d="M28.8 41.2c1.2-14 9.4-24.2 21-28.1.6 12.4-5.7 24.1-20.8 28.8" />
+                    <path d="M28.3 39.6v16.1" />
+                    <path d="M13.5 55.7c8.7-3.5 21.2-3.5 29.6 0" />
+                </svg>
+                <span class="marca__nome">FitNutri</span>
+                <span class="sr-only">(abre em nova aba)</span>
+            </a>
+            <p class="divisao__frase">Seus suplementos, com acompanhamento profissional.</p>
+        </div>
+
+        <main class="divisao__painel" id="conteudo">
+            <div class="painel__miolo">
+                <p class="passo">
+                    <span class="progresso" aria-hidden="true"><span class="ativo"></span><span></span></span>
+                    Etapa 1 de 2
+                </p>
+
+                <h1 id="titulo-pagina">Como você quer usar a FitNutri?</h1>
+                <p class="painel__intro">Escolha o tipo de perfil. Na próxima etapa você completa seus dados.</p>
+
+                <form id="formTipo" novalidate>
+                    <fieldset class="escolhas campo" aria-labelledby="titulo-pagina" aria-describedby="erro-tipo">
+                        <legend class="sr-only">Tipo de perfil</legend>
+
+                        <label class="escolha">
+                            <input type="radio" name="tipo" value="usuario" required data-validar data-erro="erro-tipo" data-msg-obrigatorio="Escolha um tipo de perfil para continuar.">
+                            <span class="escolha__corpo">
+                                <span class="escolha__icone" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                                <span class="escolha__titulo">Usuário</span>
+                                <span class="escolha__texto">Quero acompanhamento nutricional e ajuda para escolher meus suplementos.</span>
+                                <span class="escolha__marca" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+                            </span>
+                        </label>
+
+                        <label class="escolha">
+                            <input type="radio" name="tipo" value="nutricionista" required data-validar data-erro="erro-tipo" data-msg-obrigatorio="Escolha um tipo de perfil para continuar.">
+                            <span class="escolha__corpo">
+                                <span class="escolha__icone" aria-hidden="true"><i class="fa-solid fa-user-doctor"></i></span>
+                                <span class="escolha__titulo">Nutricionista</span>
+                                <span class="escolha__texto">Quero atender usuários e indicar produtos com base na minha avaliação.</span>
+                                <span class="escolha__nota">
+                                    <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+                                    <span>Seu CRN passa por verificação antes de o perfil ser publicado.</span>
+                                </span>
+                                <span class="escolha__marca" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+                            </span>
+                        </label>
+                    </fieldset>
+
+                    <p class="campo__erro" id="erro-tipo" role="alert"></p>
+                    <p id="mensagem" class="mensagem" role="status"></p>
+
+                    <button type="submit" class="btn btn--bloco">Continuar</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

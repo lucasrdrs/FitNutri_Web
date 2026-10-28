@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu perfil | FitNutri</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./painel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script src="./comum.js" defer></script>
+    <script src="./meu-perfil.js" defer></script>
+</head>
+<body class="interno">
+    <a class="pular-link" href="#conteudo">Ir para o conteúdo</a>
+
+    <header class="topo">
+        <div class="topo__miolo">
+            <a class="marca" href="./apresentacao.html" target="_blank" rel="noopener">
+                <svg class="marca__icone" viewBox="0 0 56 64" aria-hidden="true">
+                    <path d="M27.8 42.5C15.8 37 10.2 25.7 14.1 12.1c9 5.1 15.4 14.1 14.3 27.6" />
+                    <path d="M28.8 41.2c1.2-14 9.4-24.2 21-28.1.6 12.4-5.7 24.1-20.8 28.8" />
+                    <path d="M28.3 39.6v16.1" />
+                    <path d="M13.5 55.7c8.7-3.5 21.2-3.5 29.6 0" />
+                </svg>
+                <span class="marca__nome">FitNutri</span>
+                <span class="sr-only">(abre em nova aba)</span>
+            </a>
+
+            <nav aria-label="Navegação principal">
+                <a id="linkInicio" href="./inicio-usuario.html" target="_blank" rel="noopener">
+                    Início<span class="sr-only"> (abre em nova aba)</span>
+                </a>
+                <span aria-current="page">Meu perfil</span>
+                <a href="./login.html" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Sair<span class="sr-only"> (abre em nova aba)</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pagina" id="conteudo">
+        <div class="pagina__cabeca">
+            <h1 id="titulo-pagina">Meu perfil</h1>
+            <p class="pagina__sub">Confira seus dados e atualize o que mudou.</p>
+        </div>
+
+        <section id="estadoVazio" class="cartao" aria-labelledby="titulo-vazio" hidden>
+            <h2 id="titulo-vazio">Você ainda não tem um perfil</h2>
+            <p>Escolha o tipo de perfil e preencha seus dados para ver esta página.</p>
+            <a class="btn" href="./onboarding.html" target="_blank" rel="noopener">
+                Criar meu perfil<span class="sr-only"> (abre em nova aba)</span>
+            </a>
+        </section>
+
+        <section id="conteudoPerfil" class="cartao" aria-labelledby="nomeExibido" hidden>
+            <div class="perfil-cabeca">
+                <div class="avatar" id="avatar" aria-hidden="true"></div>
+
+                <div class="perfil-cabeca__texto">
+                    <h2 id="nomeExibido"></h2>
+                    <p class="perfil-cabeca__tipo" id="tipoExibido"></p>
+                    <div id="seloStatus"></div>
+                </div>
+
+                <button type="button" id="botaoEditar" class="btn btn--secundario">
+                    <i class="fa-solid fa-pen" aria-hidden="true"></i> Editar perfil
+                </button>
+            </div>
+
+            <p id="mensagemPagina" class="mensagem" role="status"></p>
+
+            <!-- Visualização -->
+            <div id="visualizacao">
+                <div id="avisoVerificacao" class="aviso aviso--pendente" hidden>
+                    <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+                    <p>
+                        <strong>Perfil pendente de verificação.</strong>
+                        Ele ainda não aparece para os usuários. Será publicado quando conferirmos seu CRN.
+                    </p>
+                </div>
+
+                <dl class="dados" id="listaDados"></dl>
+            </div>
+
+            <!-- Edição: usuário -->
+            <form id="formUsuario" class="formulario-perfil" novalidate hidden>
+                <div class="campo">
+                    <label class="campo__rotulo" for="u-nome">Nome completo</label>
+                    <div class="input-box">
+                        <span class="icone" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="u-nome" name="nome" autocomplete="name" maxlength="100" required
+                            data-validar data-regra="nomeCompleto" data-erro="u-erro-nome" aria-describedby="u-erro-nome"
+                            data-msg-obrigatorio="Informe seu nome completo.">
+                    </div>
+                    <p class="campo__erro" id="u-erro-nome"></p>
+                </div>
+
+                <div class="campo">
+                    <label class="campo__rotulo" for="u-nascimento">Data de nascimento</label>
+                    <div class="input-box">
+                        <span class="icone" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span>
+                        <input type="date" id="u-nascimento" name="nascimento" autocomplete="bday" required
+                            data-validar data-regra="dataNascimento" data-erro="u-erro-nascimento" aria-describedby="u-erro-nascimento"
+                            data-msg-obrigatorio="Informe sua data de nascimento.">
+                    </div>
+                    <p class="campo__erro" id="u-erro-nascimento"></p>
+                </div>
+
+                <div class="campo">
+                    <label class="campo__rotulo" for="u-objetivo">Objetivo principal</label>
+                    <div class="input-box">
+                        <span class="icone" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>
+                        <select id="u-objetivo" name="objetivo" required
+                            data-validar data-erro="u-erro-objetivo" aria-describedby="u-erro-objetivo"
+                            data-msg-obrigatorio="Escolha seu objetivo principal.">
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="Ganhar massa muscular">Ganhar massa muscular</option>
+                            <option value="Emagrecer">Emagrecer</option>
+                            <option value="Melhorar o desempenho nos treinos">Melhorar o desempenho nos treinos</option>
+                            <option value="Manter a saúde e o bem-estar">Manter a saúde e o bem-estar</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                        <span class="seta" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                    </div>
+                    <p class="campo__erro" id="u-erro-objetivo"></p>
+                </div>
+
+                <fieldset class="campo" aria-describedby="u-erro-rotina">
+                    <legend class="campo__rotulo">Rotina de treino</legend>
+                    <div class="opcoes">
+                        <label class="opcao">
+                            <input type="radio" name="rotina" value="Ainda não treino" required data-validar data-erro="u-erro-rotina" data-msg-obrigatorio="Escolha uma opção de rotina.">
+                            <span>Ainda não treino</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="radio" name="rotina" value="1 a 2 vezes por semana" required data-validar data-erro="u-erro-rotina" data-msg-obrigatorio="Escolha uma opção de rotina.">
+                            <span>1 a 2 vezes por semana</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="radio" name="rotina" value="3 a 4 vezes por semana" required data-validar data-erro="u-erro-rotina" data-msg-obrigatorio="Escolha uma opção de rotina.">
+                            <span>3 a 4 vezes por semana</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="radio" name="rotina" value="5 vezes ou mais por semana" required data-validar data-erro="u-erro-rotina" data-msg-obrigatorio="Escolha uma opção de rotina.">
+                            <span>5 vezes ou mais por semana</span>
+                        </label>
+                    </div>
+                    <p class="campo__erro" id="u-erro-rotina"></p>
+                </fieldset>
+
+                <fieldset class="campo">
+                    <legend class="campo__rotulo">Restrições alimentares (opcional)</legend>
+                    <div class="opcoes">
+                        <label class="opcao">
+                            <input type="checkbox" name="restricoes" value="Intolerância à lactose">
+                            <span>Intolerância à lactose</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="checkbox" name="restricoes" value="Sem glúten">
+                            <span>Sem glúten</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="checkbox" name="restricoes" value="Vegetariano">
+                            <span>Vegetariano</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="checkbox" name="restricoes" value="Vegano">
+                            <span>Vegano</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="checkbox" name="restricoes" value="Alergia a oleaginosas">
+                            <span>Alergia a oleaginosas</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="campo">
+                    <label class="campo__rotulo" for="u-outrasRestricoes">Outras restrições ou alergias (opcional)</label>
+                    <div class="input-box">
+                        <span class="icone" aria-hidden="true"><i class="fa-solid fa-pen"></i></span>
+                        <input type="text" id="u-outrasRestricoes" name="outrasRestricoes" maxlength="150" autocomplete="off">
+                    </div>
+                </div>
+
+                <p class="mensagem" role="status"></p>
+
+                <div class="formulario-perfil__acoes">
+                    <button type="submit" class="btn">Salvar alterações</button>
+                    <button type="button" class="btn btn--secundario" data-cancelar>Cancelar</button>
+                </div>
+            </form>
+
+            <!-- Edição: nutricionista -->
+            <form id="formNutricionista" class="formulario-perfil" novalidate hidden>
+                <div class="campo">
+                    <label class="campo__rotulo" for="n-nome">Nome completo</label>
+                    <div class="input-box">
+                        <span class="icone" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="n-nome" name="nome" autocomplete="name" maxlength="100" required
+                            data-validar data-regra="nomeCompleto" data-erro="n-erro-nome" aria-describedby="n-erro-nome"
+                            data-msg-obrigatorio="Informe seu nome completo.">
+                    </div>
+                    <p class="campo__erro" id="n-erro-nome"></p>
+                </div>
+
+                <fieldset class="campo" aria-describedby="n-dica-crn n-erro-crn">
+                    <legend class="campo__rotulo">Registro no CRN</legend>
+                    <div class="linha-2">
+                        <div>
+                            <label class="campo__subrotulo" for="n-crnRegiao">Regional</label>
+                            <div class="input-box">
+                                <select id="n-crnRegiao" name="crnRegiao" required
+                                    data-validar data-erro="n-erro-crn"
+                                    data-msg-obrigatorio="Escolha a regional do seu CRN.">
+                                    <option value="" disabled selected>CRN-</option>
+                                    <option value="1">CRN-1</option>
+                                    <option value="2">CRN-2</option>
+                                    <option value="3">CRN-3</option>
+                                    <option value="4">CRN-4</option>
+                                    <option value="5">CRN-5</option>
+                                    <option value="6">CRN-6</option>
+                                    <option value="7">CRN-7</option>
+                                    <option value="8">CRN-8</option>
+                                    <option value="9">CRN-9</option>
+                                    <option value="10">CRN-10</option>
+                                </select>
+                                <span class="seta" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="campo__subrotulo" for="n-crnNumero">Número do registro</label>
+                            <div class="input-box">
+                                <span class="icone" aria-hidden="true"><i class="fa-solid fa-id-card"></i></span>
+                                <input type="text" id="n-crnNumero" name="crnNumero" inputmode="numeric" autocomplete="off"
+                                    maxlength="7" pattern="\d{3,7}" required
+                                    data-validar data-erro="n-erro-crn"
+                                    data-msg-obrigatorio="Informe o número do seu CRN."
+                                    data-msg-invalido="Use só números, de 3 a 7 dígitos.">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="campo__dica" id="n-dica-crn">Se você alterar o CRN, a verificação será refeita.</p>
+                    <p class="campo__erro" id="n-erro-crn"></p>
+                </fieldset>
+
+                <div class="campo">
+                    <label class="campo__rotulo" for="n-especialidade">Especialidade</label>
+                    <div class="input-box">
+                        <span class="icone" aria-hidden="true"><i class="fa-solid fa-stethoscope"></i></span>
+                        <select id="n-especialidade" name="especialidade" required
+                            data-validar data-erro="n-erro-especialidade" aria-describedby="n-erro-especialidade"
+                            data-msg-obrigatorio="Escolha sua especialidade.">
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="Nutrição esportiva">Nutrição esportiva</option>
+                            <option value="Emagrecimento e controle de peso">Emagrecimento e controle de peso</option>
+                            <option value="Nutrição clínica">Nutrição clínica</option>
+                            <option value="Nutrição funcional">Nutrição funcional</option>
+                            <option value="Saúde da mulher e materno-infantil">Saúde da mulher e materno-infantil</option>
+                            <option value="Alimentação vegetariana e vegana">Alimentação vegetariana e vegana</option>
+                            <option value="Outra">Outra</option>
+                        </select>
+                        <span class="seta" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                    </div>
+                    <p class="campo__erro" id="n-erro-especialidade"></p>
+                </div>
+
+                <div class="campo" id="n-blocoOutra" hidden>
+                    <label class="campo__rotulo" for="n-especialidadeOutra">Qual é a sua especialidade?</label>
+                    <div class="input-box">
+                        <span class="icone" aria-hidden="true"><i class="fa-solid fa-pen"></i></span>
+                        <input type="text" id="n-especialidadeOutra" name="especialidadeOutra" maxlength="80" autocomplete="off" required
+                            data-validar data-erro="n-erro-outra" aria-describedby="n-erro-outra"
+                            data-msg-obrigatorio="Informe sua especialidade.">
+                    </div>
+                    <p class="campo__erro" id="n-erro-outra"></p>
+                </div>
+
+                <div class="campo">
+                    <label class="campo__rotulo" for="n-apresentacao">Apresentação</label>
+                    <div class="input-box input-box--area">
+                        <span class="icone" aria-hidden="true"><i class="fa-solid fa-align-left"></i></span>
+                        <textarea id="n-apresentacao" name="apresentacao" rows="6" minlength="40" maxlength="600" required
+                            data-validar data-erro="n-erro-apresentacao" aria-describedby="n-dica-apresentacao n-erro-apresentacao"
+                            data-msg-obrigatorio="Escreva uma breve apresentação."
+                            data-msg-invalido="Escreva pelo menos 40 caracteres."></textarea>
+                    </div>
+                    <p class="campo__dica" id="n-dica-apresentacao">Conte sua formação, quem você atende e como trabalha.</p>
+                    <p class="campo__dica" id="n-contador"></p>
+                    <p class="campo__erro" id="n-erro-apresentacao"></p>
+                </div>
+
+                <p class="mensagem" role="status"></p>
+
+                <div class="formulario-perfil__acoes">
+                    <button type="submit" class="btn">Salvar alterações</button>
+                    <button type="button" class="btn btn--secundario" data-cancelar>Cancelar</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

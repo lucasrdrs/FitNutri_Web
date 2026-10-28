@@ -1,0 +1,409 @@
+/* Páginas internas: início do usuário, início do nutricionista e meu perfil.
+   Usa os mesmos tokens do base.css. */
+
+body.interno {
+    background: var(--fundo-suave);
+}
+
+/* ---------- Barra superior ---------- */
+
+.topo {
+    background: var(--verde);
+    color: #fff;
+}
+
+.topo__miolo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    max-width: 1080px;
+    min-height: 68px;
+    margin: 0 auto;
+    padding: 10px clamp(16px, 4vw, 32px);
+}
+
+.topo .marca__icone {
+    width: 26px;
+    height: 32px;
+}
+
+.topo .marca__nome {
+    font-size: 1.5rem;
+}
+
+.topo nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+.topo nav a,
+.topo nav [aria-current] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.topo nav a:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+}
+
+.topo nav [aria-current="page"] {
+    background: #fff;
+    color: var(--verde);
+    font-weight: 600;
+}
+
+.topo :focus-visible {
+    outline-color: #fff;
+}
+
+/* ---------- Estrutura da página ---------- */
+
+.pagina {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 48px) clamp(16px, 4vw, 32px) 72px;
+}
+
+.pagina__cabeca {
+    margin-bottom: 28px;
+}
+
+.pagina__cabeca h1,
+.pagina > section > h1 {
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    letter-spacing: -0.01em;
+}
+
+.pagina__sub {
+    max-width: 60ch;
+    margin-top: 10px;
+    color: var(--texto-suave);
+    font-size: 17px;
+}
+
+.grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.cartao {
+    padding: clamp(20px, 3vw, 28px);
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.cartao > h2 {
+    margin-bottom: 18px;
+    font-size: 1.35rem;
+}
+
+.cartao > p + .btn,
+.cartao > h1 + p {
+    margin-top: 14px;
+}
+
+.cartao > h1 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+.cartao--pendente {
+    border: 2px solid var(--pendente-borda);
+}
+
+.cartao--verificado {
+    border: 2px solid var(--ok-borda);
+}
+
+.cartao--largo {
+    grid-column: 1 / -1;
+}
+
+/* ---------- Lista de dados ---------- */
+
+.dados {
+    display: grid;
+    gap: 16px;
+    margin: 0 0 22px;
+}
+
+.dados > div {
+    display: grid;
+    gap: 2px;
+}
+
+.dados dt {
+    color: var(--texto-suave);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.dados dd {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.dados__texto {
+    max-width: 65ch;
+    font-weight: 400;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+/* ---------- Em breve ---------- */
+
+.lista-embreve {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lista-embreve li {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-top: 1px solid var(--linha);
+}
+
+.lista-embreve li:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.lista-embreve li:last-child {
+    padding-bottom: 0;
+}
+
+.lista-embreve__icone {
+    display: grid;
+    flex: none;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--fundo-suave);
+    color: var(--verde);
+}
+
+.lista-embreve strong {
+    display: block;
+    font-weight: 600;
+}
+
+.lista-embreve span.detalhe {
+    display: block;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+.etiqueta {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--fundo-suave);
+    color: var(--texto-suave);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ---------- Etapas da verificação ---------- */
+
+.status__topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    margin-bottom: 14px;
+}
+
+.status__topo h2 {
+    font-size: 1.35rem;
+}
+
+.status__texto {
+    max-width: 62ch;
+}
+
+.status__texto strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 17px;
+}
+
+.etapas {
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.etapa {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    padding-bottom: 22px;
+}
+
+.etapa:last-child {
+    padding-bottom: 0;
+}
+
+.etapa::before {
+    position: absolute;
+    top: 32px;
+    bottom: 0;
+    left: 15px;
+    width: 2px;
+    background: var(--linha);
+    content: "";
+}
+
+.etapa:last-child::before {
+    display: none;
+}
+
+.etapa--concluida::before {
+    background: var(--verde);
+}
+
+.etapa__marca {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border: 2px solid var(--borda-campo);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+.etapa--concluida .etapa__marca {
+    border-color: var(--verde);
+    background: var(--verde);
+    color: #fff;
+}
+
+.etapa--andamento .etapa__marca {
+    border-color: var(--pendente-borda);
+    background: var(--pendente-fundo);
+    color: var(--pendente-texto);
+}
+
+.etapa__titulo {
+    display: block;
+    font-weight: 600;
+}
+
+.etapa__detalhe {
+    display: block;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+.etapa__estado {
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.etapa--concluida .etapa__estado {
+    color: var(--ok-texto);
+}
+
+.etapa--andamento .etapa__estado {
+    color: var(--pendente-texto);
+}
+
+.etapa--aguardando .etapa__estado {
+    color: var(--texto-suave);
+}
+
+/* ---------- Meu perfil ---------- */
+
+.perfil-cabeca {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 20px;
+    margin-bottom: 24px;
+}
+
+.avatar {
+    display: grid;
+    flex: none;
+    width: 72px;
+    height: 72px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--verde);
+    color: #fff;
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.perfil-cabeca__texto {
+    flex: 1;
+    min-width: 200px;
+}
+
+.perfil-cabeca__texto h2 {
+    font-size: 1.6rem;
+    overflow-wrap: anywhere;
+}
+
+.perfil-cabeca__tipo {
+    margin: 2px 0 8px;
+    color: var(--texto-suave);
+}
+
+.formulario-perfil {
+    max-width: 560px;
+}
+
+.formulario-perfil__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+@media (max-width: 520px) {
+    .topo nav a,
+    .topo nav [aria-current] {
+        padding: 8px 12px;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.35rem;
+    }
+
+    .formulario-perfil__acoes .btn {
+        width: 100%;
+    }
+}

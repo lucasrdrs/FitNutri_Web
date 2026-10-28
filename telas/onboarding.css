@@ -1,0 +1,264 @@
+/* Layout dividido do onboarding e dos formulários de perfil.
+   Mesma ideia do login: fundo escuro com ondas de um lado e painel branco do outro. */
+
+.divisao {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+.divisao__lateral {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    height: 100vh;
+    align-self: start;
+    padding: clamp(32px, 4vw, 64px);
+    background: #06130d url("../imagens/fitnutri-login-fundo-escuro.png") center / cover no-repeat;
+    color: #fff;
+}
+
+.divisao__lateral :focus-visible {
+    outline-color: #fff;
+}
+
+.divisao__frase {
+    max-width: 14em;
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.divisao__painel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(32px, 5vw, 72px) clamp(24px, 5vw, 72px);
+    background: #fff;
+}
+
+.painel__miolo {
+    width: 100%;
+    max-width: 480px;
+}
+
+/* ---------- Cabeçalho do painel ---------- */
+
+.passo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    color: var(--texto-suave);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.progresso {
+    display: flex;
+    gap: 4px;
+}
+
+.progresso span {
+    width: 28px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--linha);
+}
+
+.progresso .ativo {
+    background: var(--verde);
+}
+
+.painel__miolo h1 {
+    margin-bottom: 10px;
+    color: #000;
+    font-size: clamp(1.75rem, 2.6vw, 2.2rem);
+    text-align: center;
+}
+
+.painel__intro {
+    max-width: 40ch;
+    margin: 0 auto 28px;
+    color: var(--texto-suave);
+    font-size: 15px;
+    text-align: center;
+}
+
+.painel__voltar {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* ---------- Escolha do tipo de perfil ---------- */
+
+.escolhas {
+    display: grid;
+    gap: 14px;
+    margin: 0 0 8px;
+    padding: 0;
+    border: 0;
+}
+
+.escolha {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.escolha input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.escolha__corpo {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 16px;
+    row-gap: 4px;
+    align-items: start;
+    padding: 18px 20px;
+    border: 1px solid var(--borda-campo);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.12);
+    transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.escolha:hover .escolha__corpo {
+    border-color: var(--verde);
+}
+
+.escolha__icone {
+    display: grid;
+    grid-row: 1 / span 3;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--fundo-suave);
+    color: var(--verde);
+    font-size: 20px;
+}
+
+.escolha__titulo {
+    grid-column: 2;
+    align-self: center;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.escolha__texto {
+    grid-column: 2;
+    color: var(--texto-suave);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.escolha__nota {
+    display: flex;
+    grid-column: 2;
+    gap: 8px;
+    margin-top: 6px;
+    color: var(--pendente-texto);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.escolha__nota i {
+    margin-top: 2px;
+}
+
+.escolha__marca {
+    display: grid;
+    grid-column: 3;
+    grid-row: 1;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    border: 2px solid var(--borda-campo);
+    border-radius: 50%;
+    background: #fff;
+    color: transparent;
+    font-size: 11px;
+}
+
+.escolha input:checked + .escolha__corpo {
+    border-color: var(--verde);
+    background: #f4f9f5;
+    box-shadow: 0 0 0 2px var(--verde);
+}
+
+.escolha input:checked + .escolha__corpo .escolha__marca {
+    border-color: var(--verde);
+    background: var(--verde);
+    color: #fff;
+}
+
+.escolha input:focus-visible + .escolha__corpo {
+    outline: 3px solid var(--foco);
+    outline-offset: 3px;
+}
+
+#erro-tipo {
+    margin: 4px 0 16px;
+}
+
+.painel__miolo .btn--bloco {
+    margin-top: 12px;
+}
+
+/* ---------- Telas estreitas ---------- */
+
+@media (max-width: 900px) {
+    .divisao {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .divisao__lateral {
+        position: static;
+        height: auto;
+        padding: 18px 24px;
+    }
+
+    .divisao__frase {
+        display: none;
+    }
+
+    .divisao__painel {
+        align-items: flex-start;
+        min-height: calc(100vh - 72px);
+        padding: 32px 24px 56px;
+    }
+}
+
+@media (max-width: 420px) {
+    .escolha__corpo {
+        grid-template-columns: auto 1fr;
+        padding: 16px;
+    }
+
+    .escolha__marca {
+        display: none;
+    }
+
+    .linha-2 {
+        grid-template-columns: 1fr;
+    }
+}
