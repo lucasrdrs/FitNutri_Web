@@ -7,7 +7,8 @@ const rememberMe = document.querySelector("#rememberMe");
 const message = document.querySelector("#loginMessage");
 const submitButton = form.querySelector('button[type="submit"]');
 
-const savedEmail = localStorage.getItem("fitnutri.email");
+// O e-mail fica apenas nesta aba, não entre sessões do navegador.
+const savedEmail = sessionStorage.getItem("fitnutri.email");
 
 if (savedEmail) {
     emailInput.value = savedEmail;
@@ -47,15 +48,17 @@ form.addEventListener("submit", async (event) => {
         }
 
         if (rememberMe.checked) {
-            localStorage.setItem("fitnutri.email", email);
+            sessionStorage.setItem("fitnutri.email", email);
         } else {
-            localStorage.removeItem("fitnutri.email");
+            sessionStorage.removeItem("fitnutri.email");
         }
 
         sessionStorage.setItem("fitnutri.accessToken", data.accessToken);
         sessionStorage.setItem("fitnutri.expiresAtUtc", data.expiresAtUtc);
 
-        window.location.href = "./apresentacao.html";
+        // Mantém a mesma aba para preservar o JWT no sessionStorage.
+        // Até existir GET /api/perfil/me, o fluxo inicia pela escolha de perfil.
+        window.location.replace("./onboarding.html");
     } catch (error) {
         console.error(error);
         message.textContent =

@@ -1,5 +1,5 @@
 const API_URL = "https://localhost:7046";
-const SUCCESS_URL = new URL("./apresentacao.html", window.location.href).href;
+const SUCCESS_URL = new URL("./onboarding.html", window.location.href).href;
 
 const form = document.querySelector("#registerForm");
 const userNameInput = document.querySelector("#registerUserName");
