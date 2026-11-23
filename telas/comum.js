@@ -1,15 +1,15 @@
 /*
  * Funções compartilhadas pelas telas de onboarding e perfil.
- *
- * Não há autenticação nem banco de dados: o perfil fica salvo apenas no
- * localStorage do navegador, para que as telas conversem entre si.
- * Quando a API existir, basta trocar carregarPerfil() e salvarPerfil().
+ * O perfil local continua disponível temporariamente durante a migração.
+ * As funções da API abaixo já permitem carregar/salvar os perfis no backend.
+ * A navegação entre páginas do FitNutri é feita na mesma aba.
  */
 (function () {
     "use strict";
 
     const CHAVE_PERFIL = "fitnutri.perfil";
     const CHAVE_TIPO = "fitnutri.tipo";
+    const API_URL = "https://localhost:7046";
 
     const PAGINAS = {
         apresentacao: "./apresentacao.html",
@@ -74,6 +74,74 @@
 
     function paginaInicial(tipo) {
         return tipo === "nutricionista" ? PAGINAS.inicioNutricionista : PAGINAS.inicioUsuario;
+    }
+
+    /* ---------- Perfis na API ---------- */
+
+    async function requisicaoPerfilApi(recurso, metodo = "GET", dados) {
+        const token = window.sessionStorage.getItem("fitnutri.accessToken");
+
+        if (!token) {
+            const erro = new Error("A sessão não foi encontrada nesta aba. Entre novamente.");
+            erro.status = 401;
+            throw erro;
+        }
+
+        const headers = {
+            "Authorization": `Bearer ${token}`
+        };
+        const opcoes = { method: metodo, headers };
+
+        if (dados !== undefined) {
+            headers["Content-Type"] = "application/json";
+            opcoes.body = JSON.stringify(dados);
+        }
+
+        let resposta;
+        try {
+            resposta = await fetch(`${API_URL}/api/profile/${recurso}`, opcoes);
+        } catch (causa) {
+            const erro = new Error("Não foi possível conectar à API. Confira se ela está em execução e se a URL está correta.");
+            erro.cause = causa;
+            throw erro;
+        }
+
+        const resultado = await resposta.json().catch(() => null);
+
+        if (!resposta.ok) {
+            const erro = new Error(resultado?.message || `Erro da API: ${resposta.status}`);
+            erro.status = resposta.status;
+            erro.detalhes = resultado;
+            throw erro;
+        }
+
+        return resultado;
+    }
+
+    function obterPerfilDaApi() {
+        return requisicaoPerfilApi("me");
+    }
+
+    function salvarPerfilUsuarioNaApi(perfil) {
+        return requisicaoPerfilApi("user", "PUT", {
+            fullName: perfil.nome,
+            birthDate: perfil.nascimento || null,
+            goal: perfil.objetivo || null,
+            trainingRoutine: perfil.rotina || null,
+            dietaryRestrictions: perfil.restricoes || [],
+            otherDietaryRestrictions: perfil.outrasRestricoes || null
+        });
+    }
+
+    function salvarPerfilNutricionistaNaApi(perfil) {
+        return requisicaoPerfilApi("nutritionist", "PUT", {
+            fullName: perfil.nome,
+            crnRegion: perfil.crnRegiao,
+            crnNumber: perfil.crnNumero,
+            specialty: perfil.especialidade,
+            otherSpecialty: perfil.especialidadeOutra || null,
+            presentation: perfil.apresentacao
+        });
     }
 
     /*
@@ -142,28 +210,52 @@
         return selo;
     }
 
-    /* ---------- Abrir páginas em nova aba ---------- */
+    /* ---------- Navegação na mesma aba ---------- */
 
-    // Abre a aba durante o clique/envio, para reduzir a chance de bloqueio.
+    // Mantém a interface usada pelas telas existentes, mas não abre outra aba.
     function abrirAbaVazia() {
-        return window.open("about:blank", "_blank");
+        return { fitNutriNavigation: true };
     }
 
-    function enviarAba(aba, url) {
-        if (!aba || aba.closed) {
-            return false;
-        }
-
-        aba.opener = null;
-        aba.location.replace(new URL(url, window.location.href).href);
+    function enviarAba(_referencia, url) {
+        const destino = new URL(url, window.location.href);
+        window.location.replace(destino.href);
         return true;
     }
 
-    function fecharAba(aba) {
-        if (aba && !aba.closed) {
-            aba.close();
-        }
+    // Não há aba separada para fechar na navegação atual.
+    function fecharAba(_referencia) {
+        // Mantida para compatibilidade com os formulários existentes.
     }
+
+    // Protege páginas que ainda tenham target="_blank" no HTML.
+    // Ctrl/Command/Shift+clique continua disponível para quem quiser abrir outra aba.
+    function habilitarNavegacaoNaMesmaAba() {
+        document.addEventListener("click", (evento) => {
+            if (
+                evento.defaultPrevented ||
+                evento.button !== 0 ||
+                evento.ctrlKey || evento.metaKey || evento.shiftKey || evento.altKey
+            ) {
+                return;
+            }
+
+            const alvo = evento.target;
+            if (!(alvo instanceof Element)) {
+                return;
+            }
+
+            const link = alvo.closest('a[target="_blank"]');
+            if (!link || link.hasAttribute("download")) {
+                return;
+            }
+
+            evento.preventDefault();
+            window.location.assign(link.href);
+        });
+    }
+
+    habilitarNavegacaoNaMesmaAba();
 
     /* ---------- Mensagens ---------- */
 
@@ -179,8 +271,6 @@
     function anexarLink(elemento, texto, url) {
         const link = document.createElement("a");
         link.href = url;
-        link.target = "_blank";
-        link.rel = "noopener";
         link.textContent = texto;
 
         const aviso = document.createElement("span");
@@ -421,6 +511,9 @@
     window.FitNutri = {
         PAGINAS,
         carregarPerfil,
+        obterPerfilDaApi,
+        salvarPerfilUsuarioNaApi,
+        salvarPerfilNutricionistaNaApi,
         salvarPerfil,
         obterTipo,
         definirTipo,

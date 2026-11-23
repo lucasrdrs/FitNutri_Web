@@ -71,7 +71,6 @@ form.addEventListener("submit", async (event) => {
         return;
     }
 
-    // Abre a aba durante o clique do usuário para reduzir a chance de bloqueio.
     const destinationTab = window.open("about:blank", "_blank");
 
     submitButton.disabled = true;
