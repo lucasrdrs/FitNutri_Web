@@ -67,6 +67,11 @@
                         autocomplete="new-password"
                         minlength="8"
                         required>
+                    <button type="button" class="password-toggle" id="toggleRegisterPassword"
+                        aria-label="Mostrar senha" aria-pressed="false" aria-controls="registerPassword"
+                        title="Mostrar senha">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </button>
                 </div>
                 <p class="password-note">Use pelo menos 8 caracteres, com maiúscula, minúscula, número e símbolo.</p>
 
@@ -80,6 +85,11 @@
                         autocomplete="new-password"
                         minlength="8"
                         required>
+                    <button type="button" class="password-toggle" id="toggleConfirmPassword"
+                        aria-label="Mostrar senha de confirmação" aria-pressed="false"
+                        aria-controls="confirmPassword" title="Mostrar senha de confirmação">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </button>
                 </div>
 
                 <p id="registerMessage" class="login-message" role="alert" aria-live="polite"></p>
@@ -87,7 +97,7 @@
                 <button type="submit" class="btn">Criar conta</button>
 
                 <p class="link-p">
-                    <a href="./login.html" class="link" target="_blank" rel="noopener">Já tem uma conta? Entrar</a>
+                    <a href="./login.html" class="link" >Já tem uma conta? Entrar</a>
                 </p>
             </form>
         </section>

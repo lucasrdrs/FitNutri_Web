@@ -10,25 +10,47 @@ const confirmPasswordInput = document.querySelector("#confirmPassword");
 const message = document.querySelector("#registerMessage");
 const submitButton = form.querySelector('button[type="submit"]');
 
+function configurarAlternanciaSenha(input, button, nomeCampo) {
+    if (!input || !button) return;
+
+    const icon = button.querySelector("i");
+
+    button.addEventListener("click", () => {
+        const mostrar = input.type === "password";
+        const posicaoCursor = input.selectionStart ?? input.value.length;
+
+        input.type = mostrar ? "text" : "password";
+
+        const textoAcao = `${mostrar ? "Ocultar" : "Mostrar"} ${nomeCampo}`;
+        button.setAttribute("aria-label", textoAcao);
+        button.setAttribute("aria-pressed", String(mostrar));
+        button.title = textoAcao;
+
+        if (icon) {
+            icon.classList.toggle("fa-eye", !mostrar);
+            icon.classList.toggle("fa-eye-slash", mostrar);
+        }
+
+        input.focus({ preventScroll: true });
+        input.setSelectionRange(posicaoCursor, posicaoCursor);
+    });
+}
+
+configurarAlternanciaSenha(
+    passwordInput,
+    document.querySelector("#toggleRegisterPassword"),
+    "senha"
+);
+configurarAlternanciaSenha(
+    confirmPasswordInput,
+    document.querySelector("#toggleConfirmPassword"),
+    "senha de confirmação"
+);
+
 function showMessage(text, type) {
     message.textContent = text;
     message.classList.remove("success", "error");
     message.classList.add(type);
-}
-
-function showSuccessMessage(text) {
-    message.replaceChildren();
-    message.append(document.createTextNode(`${text} `));
-
-    const link = document.createElement("a");
-    link.href = SUCCESS_URL;
-    link.target = "_blank";
-    link.rel = "noopener";
-    link.textContent = "Abrir o FitNutri";
-    message.append(link);
-
-    message.classList.remove("error");
-    message.classList.add("success");
 }
 
 function getApiError(data) {
@@ -71,8 +93,6 @@ form.addEventListener("submit", async (event) => {
         return;
     }
 
-    const destinationTab = window.open("about:blank", "_blank");
-
     submitButton.disabled = true;
     submitButton.textContent = "Criando conta...";
 
@@ -97,10 +117,6 @@ form.addEventListener("submit", async (event) => {
         const data = await response.json().catch(() => null);
 
         if (!response.ok) {
-            if (destinationTab && !destinationTab.closed) {
-                destinationTab.close();
-            }
-
             showMessage(
                 getApiError(data) || "Não foi possível criar a conta. Confira os dados e tente novamente.",
                 "error"
@@ -109,19 +125,8 @@ form.addEventListener("submit", async (event) => {
         }
 
         form.reset();
-
-        if (destinationTab && !destinationTab.closed) {
-            destinationTab.location.replace(SUCCESS_URL);
-            destinationTab.opener = null;
-            showMessage(data?.message || "Conta criada com sucesso. Abrimos o FitNutri em outra aba.", "success");
-        } else {
-            showSuccessMessage(data?.message || "Conta criada com sucesso.");
-        }
+        window.location.replace(SUCCESS_URL);
     } catch (error) {
-        if (destinationTab && !destinationTab.closed) {
-            destinationTab.close();
-        }
-
         console.error(error);
 
         if (error.name === "AbortError") {

@@ -7,6 +7,36 @@ const rememberMe = document.querySelector("#rememberMe");
 const message = document.querySelector("#loginMessage");
 const submitButton = form.querySelector('button[type="submit"]');
 
+const togglePasswordButton = document.querySelector("#toggleLoginPassword");
+
+function configurarAlternanciaSenha(input, button, nomeCampo = "senha") {
+    if (!input || !button) return;
+
+    const icon = button.querySelector("i");
+
+    button.addEventListener("click", () => {
+        const mostrar = input.type === "password";
+        const posicaoCursor = input.selectionStart ?? input.value.length;
+
+        input.type = mostrar ? "text" : "password";
+
+        const textoAcao = `${mostrar ? "Ocultar" : "Mostrar"} ${nomeCampo}`;
+        button.setAttribute("aria-label", textoAcao);
+        button.setAttribute("aria-pressed", String(mostrar));
+        button.title = textoAcao;
+
+        if (icon) {
+            icon.classList.toggle("fa-eye", !mostrar);
+            icon.classList.toggle("fa-eye-slash", mostrar);
+        }
+
+        input.focus({ preventScroll: true });
+        input.setSelectionRange(posicaoCursor, posicaoCursor);
+    });
+}
+
+configurarAlternanciaSenha(passwordInput, togglePasswordButton);
+
 const savedEmail = localStorage.getItem("fitnutri.email");
 if (savedEmail) {
     emailInput.value = savedEmail;

@@ -133,3 +133,37 @@ h2{
     font-size: 13px;
 }
 
+/* Botão acessível para mostrar/ocultar palavras-passe */
+.password-toggle {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #103B2B;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+.password-toggle:hover {
+    background-color: rgba(16, 59, 43, 0.08);
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid #103B2B;
+    outline-offset: 2px;
+}
+
+.password-toggle i {
+    font-size: 15px;
+}
+
+.input-box input {
+    min-width: 0;
+}
