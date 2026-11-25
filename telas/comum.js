@@ -76,6 +76,26 @@
         return tipo === "nutricionista" ? PAGINAS.inicioNutricionista : PAGINAS.inicioUsuario;
     }
 
+    /* ---------- Encerramento da sessão no navegador ---------- */
+
+    function encerrarSessaoNoNavegador() {
+        // O token fica em sessionStorage para não persistir após fechar a aba.
+        window.sessionStorage.removeItem("fitnutri.accessToken");
+        window.sessionStorage.removeItem("fitnutri.expiresAtUtc");
+
+        // Usa a mesma aba para que o contexto autenticado seja encerrado.
+        window.location.replace(PAGINAS.login);
+    }
+
+    // Todos os links com este atributo executam o mesmo fluxo de saída.
+    document.addEventListener("click", (evento) => {
+        const linkSair = evento.target.closest("[data-fitnutri-logout]");
+        if (!linkSair) return;
+
+        evento.preventDefault();
+        encerrarSessaoNoNavegador();
+    });
+
     /* ---------- Perfis na API ---------- */
 
     async function requisicaoPerfilApi(recurso, metodo = "GET", dados) {
